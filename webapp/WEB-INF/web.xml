@@ -8,7 +8,7 @@
 	<!-- 
 	어노테이션으로 설정을 변경하면서 주석처리함.
 	<listener>
-		<listener-class>next.support.init.ContextLoaderListender</listener-class>
+		<listener-class>next.support.context.ContextLoaderListender</listener-class>
 	</listener>
 	
 	<servlet>
@@ -16,12 +16,11 @@
 		<servlet-name>DispatcherServlet</servlet-name>
 		<servlet-class>core.mvc.DispatcherServlet</servlet-class>
 	</servlet>
-
 	<servlet-mapping>
 		<servlet-name>DispatcherServlet</servlet-name>
 		<url-pattern>*.next</url-pattern>
 	</servlet-mapping>
-	-->
+	-->	
 	
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
