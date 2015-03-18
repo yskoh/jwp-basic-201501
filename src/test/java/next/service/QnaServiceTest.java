@@ -4,7 +4,9 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
 
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import next.ExistedAnotherUserException;
 import next.ResourceNotFoundException;
@@ -53,17 +55,16 @@ public class QnaServiceTest {
 		// given
 		long questionId = 1L;
 		Question question = new Question(questionId, "writer", "title", "content", new Date(), 0);
-		questionDao.insert(question);
 		Answer answer1 = new Answer(2L, "writer", "answered", new Date(), questionId);
 		Answer answer2 = new Answer(3L, "writer", "answered", new Date(), questionId);
-		answerDao.insert(answer1);
-		answerDao.insert(answer2);
-
+		List<Answer> answers = Arrays.asList(answer1, answer2);
+		question.setAnswers(answers);
+		questionDao.insert(question);
+		
 		// when
 		qnaService.delete(questionId);
 		
 		// then
-		assertThat(answerDao.findAllByQuestionId(questionId).size(), is(0));
 		assertThat(questionDao.findById(questionId), is(nullValue()));
 	}
 	
@@ -72,17 +73,16 @@ public class QnaServiceTest {
 		// given
 		long questionId = 1L;
 		Question question = new Question(questionId, "writer", "title", "content", new Date(), 0);
-		questionDao.insert(question);
 		Answer answer1 = new Answer(2L, "another", "answered", new Date(), questionId);
 		Answer answer2 = new Answer(3L, "writer", "answered", new Date(), questionId);
-		answerDao.insert(answer1);
-		answerDao.insert(answer2);
+		List<Answer> answers = Arrays.asList(answer1, answer2);
+		question.setAnswers(answers);
+		questionDao.insert(question);
 
 		// when
 		qnaService.delete(questionId);
 		
 		// then
-		assertThat(answerDao.findAllByQuestionId(questionId).size(), is(0));
 		assertThat(questionDao.findById(questionId), is(nullValue()));
 	}
 }

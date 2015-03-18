@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import next.ResourceNotFoundException;
 import next.model.Question;
 
 public class MockQuestionDao implements QuestionDao {
@@ -32,5 +33,14 @@ public class MockQuestionDao implements QuestionDao {
 	@Override
 	public void delete(long questionId) {
 		questions.remove(questionId);
+	}
+
+	@Override
+	public Question findWithAnswersById(long questionId) throws ResourceNotFoundException {
+		Question question = findById(questionId);
+		if (question == null) {
+			throw new ResourceNotFoundException("존재하지 않는 질문입니다.");
+		}
+		return question;
 	}
 }

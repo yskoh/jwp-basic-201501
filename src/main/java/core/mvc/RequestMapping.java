@@ -33,8 +33,8 @@ public class RequestMapping {
 		DataSource dataSource = ConnectionManager.getDataSource();
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		
-		QuestionDao questionDao = new JdbcQuestionDao(jdbcTemplate);
 		AnswerDao answerDao = new JdbcAnswerDao(jdbcTemplate);
+		QuestionDao questionDao = new JdbcQuestionDao(jdbcTemplate, answerDao);
 		
 		QnaService qnaService = new QnaService(questionDao, answerDao);
 		

@@ -28,7 +28,8 @@ public class QuestionDaoTest {
 		
 		DataSource dataSource = ConnectionManager.getDataSource();
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-		dut = new JdbcQuestionDao(jdbcTemplate);
+		AnswerDao answerDao = new JdbcAnswerDao(jdbcTemplate);
+		dut = new JdbcQuestionDao(jdbcTemplate, answerDao);
 	}
 
 	@Test

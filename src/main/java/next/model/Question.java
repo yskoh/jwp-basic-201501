@@ -1,26 +1,33 @@
 package next.model;
 
 import java.util.Date;
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Question {
+	private static final Logger logger = LoggerFactory.getLogger(Question.class);
+	
 	private long questionId;
-	
+
 	private String writer;
-	
+
 	private String title;
-	
+
 	private String contents;
-	
+
 	private Date createdDate;
-	
+
 	private int countOfComment;
-	
+
+	private List<Answer> answers;
+
 	public Question(String writer, String title, String contents) {
 		this(0, writer, title, contents, new Date(), 0);
-	}	
-	
-	public Question(long questionId, String writer, String title, String contents,
-			Date createdDate, int countOfComment) {
+	}
+
+	public Question(long questionId, String writer, String title, String contents, Date createdDate, int countOfComment) {
 		this.questionId = questionId;
 		this.writer = writer;
 		this.title = title;
@@ -32,7 +39,7 @@ public class Question {
 	public long getQuestionId() {
 		return questionId;
 	}
-	
+
 	public String getWriter() {
 		return writer;
 	}
@@ -48,7 +55,7 @@ public class Question {
 	public Date getCreatedDate() {
 		return createdDate;
 	}
-	
+
 	public long getTimeFromCreateDate() {
 		return this.createdDate.getTime();
 	}
@@ -56,13 +63,34 @@ public class Question {
 	public int getCountOfComment() {
 		return countOfComment;
 	}
+	
+	public void setAnswers(List<Answer> answers) {
+		this.answers = answers;
+	}
+	
+	public List<Answer> getAnswers() {
+		return answers;
+	}
+
+	public boolean canDelete() {
+		if (answers == null || answers.isEmpty()) {
+			return true;
+		}
+		
+		for (Answer answer : answers) {
+			logger.debug("question writer : {}, answer writer : {}", writer, answer.getWriter());
+			if (!writer.equals(answer.getWriter())) {
+				return false;
+			}
+		}
+		
+		return true;
+	}
 
 	@Override
 	public String toString() {
-		return "Question [questionId=" + questionId + ", writer=" + writer
-				+ ", title=" + title + ", contents=" + contents
-				+ ", createdDate=" + createdDate + ", countOfComment="
-				+ countOfComment + "]";
+		return "Question [questionId=" + questionId + ", writer=" + writer + ", title=" + title + ", contents=" + contents + ", createdDate="
+				+ createdDate + ", countOfComment=" + countOfComment + "]";
 	}
 
 	@Override
