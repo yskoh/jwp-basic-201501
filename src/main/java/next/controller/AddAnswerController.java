@@ -3,18 +3,23 @@ package next.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import next.dao.JdbcAnswerDao;
 import next.dao.AnswerDao;
 import next.dao.QuestionDao;
-import next.dao.JdbcQuestionDao;
 import next.model.Answer;
 import core.mvc.AbstractController;
 import core.mvc.ModelAndView;
 import core.utils.ServletRequestUtils;
 
 public class AddAnswerController extends AbstractController {
-	private QuestionDao questionDao = JdbcQuestionDao.getInstance();
-	private AnswerDao answerDao = JdbcAnswerDao.getInstance();
+	private QuestionDao questionDao;
+	private AnswerDao answerDao;
+
+	public AddAnswerController(QuestionDao questionDao, AnswerDao answerDao) {
+		super();
+		this.questionDao = questionDao;
+		this.answerDao = answerDao;
+	}
+
 
 	@Override
 	public ModelAndView execute(HttpServletRequest request, HttpServletResponse response) throws Exception {

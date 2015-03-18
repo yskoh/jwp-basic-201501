@@ -7,18 +7,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.sql.DataSource;
+
 public class JdbcTemplate {
-	private static JdbcTemplate jdbcTemplate = new JdbcTemplate();
-	
-	private JdbcTemplate() {
+	private DataSource dataSource;
+
+	public JdbcTemplate(DataSource dataSource) {
+		this.dataSource = dataSource;
 	}
-	
-	public static JdbcTemplate getInstance() {
-		return jdbcTemplate;
-	}
-	
+
 	public void update(String sql, PreparedStatementSetter pss) throws DataAccessException {
-		try (Connection conn = ConnectionManager.getConnection(); 
+		try (Connection conn = dataSource.getConnection(); 
 			PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pss.setParameters(pstmt);
 			pstmt.executeUpdate();
@@ -45,7 +44,7 @@ public class JdbcTemplate {
 
 	public <T> List<T> query(String sql, RowMapper<T> rm, PreparedStatementSetter pss) throws DataAccessException {
 		ResultSet rs = null;
-		try (Connection conn = ConnectionManager.getConnection(); 
+		try (Connection conn = dataSource.getConnection(); 
 			PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pss.setParameters(pstmt);
 			rs = pstmt.executeQuery();

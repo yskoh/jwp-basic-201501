@@ -10,16 +10,12 @@ import core.jdbc.JdbcTemplate;
 import core.jdbc.RowMapper;
 
 public class JdbcAnswerDao implements AnswerDao {
-	private static AnswerDao answerDao = new JdbcAnswerDao();
-	private JdbcTemplate jdbcTemplate = JdbcTemplate.getInstance();
+	private JdbcTemplate jdbcTemplate;
 	
-	private JdbcAnswerDao() {
+	public JdbcAnswerDao(JdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate = jdbcTemplate;
 	}
 	
-	public static AnswerDao getInstance() {
-		return answerDao;
-	}
-
 	/* (non-Javadoc)
 	 * @see next.dao.IAnswerDao#insert(next.model.Answer)
 	 */

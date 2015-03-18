@@ -5,23 +5,16 @@ import javax.servlet.http.HttpServletResponse;
 
 import next.ExistedAnotherUserException;
 import next.ResourceNotFoundException;
-import next.dao.AnswerDao;
-import next.dao.JdbcAnswerDao;
-import next.dao.JdbcQuestionDao;
-import next.dao.QuestionDao;
 import next.service.QnaService;
 import core.mvc.AbstractController;
 import core.mvc.ModelAndView;
 import core.utils.ServletRequestUtils;
 
 public class DeleteController extends AbstractController {
-	private QuestionDao questionDao = JdbcQuestionDao.getInstance();
-	private AnswerDao answerDao = JdbcAnswerDao.getInstance();
-	
 	private QnaService qnaService;
-	
-	public DeleteController() {
-		this.qnaService = new QnaService(questionDao, answerDao);
+
+	public DeleteController(QnaService qnaService) {
+		this.qnaService = qnaService;
 	}
 
 	@Override
@@ -33,8 +26,8 @@ public class DeleteController extends AbstractController {
 			return jstlView("redirect:/list.next");
 		} catch (ResourceNotFoundException|ExistedAnotherUserException ex) {
 			ModelAndView mav = jstlView("show.jsp");
-			mav.addObject("question", questionDao.findById(questionId));
-			mav.addObject("answers", answerDao.findAllByQuestionId(questionId));
+			mav.addObject("question", qnaService.findById(questionId));
+			mav.addObject("answers", qnaService.findAnswersByQuestionId(questionId));
 			mav.addObject("errorMessage", "다른 사용자가 추가한 댓글이 존재해 삭제할 수 없습니다.");
 			return mav;
 		}

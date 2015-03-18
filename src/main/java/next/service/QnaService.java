@@ -47,4 +47,12 @@ public class QnaService {
 		answerDao.delete(questionId);
 		questionDao.delete(questionId);
 	}
+	
+	public Question findById(long questionId) {
+		return questionDao.findById(questionId);
+	}
+
+	public List<Answer> findAnswersByQuestionId(long questionId) {
+		return answerDao.findAllByQuestionId(questionId);
+	}
 }

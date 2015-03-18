@@ -4,14 +4,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import next.dao.QuestionDao;
-import next.dao.JdbcQuestionDao;
 import next.model.Question;
 import core.mvc.AbstractController;
 import core.mvc.ModelAndView;
 import core.utils.ServletRequestUtils;
 
 public class SaveController extends AbstractController {
-	private QuestionDao questionDao = JdbcQuestionDao.getInstance();
+	private QuestionDao questionDao;
+
+	public SaveController(QuestionDao questionDao) {
+		this.questionDao = questionDao;
+	}
 
 	@Override
 	public ModelAndView execute(HttpServletRequest request, HttpServletResponse response) throws Exception {

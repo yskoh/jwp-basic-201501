@@ -10,14 +10,10 @@ import core.jdbc.JdbcTemplate;
 import core.jdbc.RowMapper;
 
 public class JdbcQuestionDao implements QuestionDao {
-	private static QuestionDao questionDao = new JdbcQuestionDao();
-	private JdbcTemplate jdbcTemplate = JdbcTemplate.getInstance();
+	private JdbcTemplate jdbcTemplate;
 	
-	private JdbcQuestionDao() {
-	}
-	
-	public static QuestionDao getInstance() {
-		return questionDao;
+	public JdbcQuestionDao(JdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate = jdbcTemplate;
 	}
 	
 	/* (non-Javadoc)
