@@ -10,17 +10,17 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class RequestMappingTest {
-	private RequestMapping rm;
+	private HandlerMapping rm;
 	
 	@Before
 	public void setup() {
-		rm = new RequestMapping();
+		rm = new HandlerMapping();
 	}
 	
 	@Test
 	public void findController() throws Exception {
 		String url = "index.next";
-		Controller controller = new Controller() {
+		OldController controller = new OldController() {
 			@Override
 			public ModelAndView execute(HttpServletRequest request,
 					HttpServletResponse response) throws Exception {
@@ -29,7 +29,7 @@ public class RequestMappingTest {
 		};
 		rm.put(url, controller);
 		
-		Controller actual = rm.findController(url);
+		OldController actual = rm.findController(url);
 		assertThat(actual, is(controller));
 	}
 }

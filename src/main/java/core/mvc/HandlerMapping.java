@@ -24,10 +24,10 @@ import org.slf4j.LoggerFactory;
 import core.jdbc.ConnectionManager;
 import core.jdbc.JdbcTemplate;
 
-public class RequestMapping {
-	private static final Logger logger = LoggerFactory.getLogger(RequestMapping.class);
+public class HandlerMapping {
+	private static final Logger logger = LoggerFactory.getLogger(HandlerMapping.class);
 	
-	private Map<String, Controller> mappings = new HashMap<String, Controller>();
+	private Map<String, OldController> mappings = new HashMap<String, OldController>();
 	
 	public void initMapping() {
 		DataSource dataSource = ConnectionManager.getDataSource();
@@ -50,11 +50,11 @@ public class RequestMapping {
 		logger.info("Initialized Mapping Completed!");
 	}
 
-	public Controller findController(String url) {
+	public OldController findController(String url) {
 		return mappings.get(url);
 	}
 
-	void put(String url, Controller controller) {
+	void put(String url, OldController controller) {
 		mappings.put(url, controller);
 	}
 
