@@ -24,8 +24,8 @@ import org.slf4j.LoggerFactory;
 import core.jdbc.ConnectionManager;
 import core.jdbc.JdbcTemplate;
 
-public class RequestMapping {
-	private static final Logger logger = LoggerFactory.getLogger(RequestMapping.class);
+public class HandlerMapping {
+	private static final Logger logger = LoggerFactory.getLogger(HandlerMapping.class);
 	
 	private Map<String, Controller> mappings = new HashMap<String, Controller>();
 	

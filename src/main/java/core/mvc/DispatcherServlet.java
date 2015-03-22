@@ -16,12 +16,12 @@ public class DispatcherServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final Logger logger = LoggerFactory.getLogger(DispatcherServlet.class);
 	
-	private RequestMapping rm;
+	private HandlerMapping hm;
 
 	@Override
 	public void init() throws ServletException {
-		rm = new RequestMapping();
-		rm.initMapping();
+		hm = new HandlerMapping();
+		hm.initMapping();
 	}
 
 	@Override
@@ -30,7 +30,7 @@ public class DispatcherServlet extends HttpServlet {
 		String requestUri = req.getRequestURI();
 		logger.debug("Method : {}, Request URI : {}", req.getMethod(), requestUri);
 		
-		Controller controller = rm.findController(urlExceptParameter(req.getRequestURI()));
+		Controller controller = hm.findController(urlExceptParameter(req.getRequestURI()));
 		ModelAndView mav;
 		try {
 			mav = controller.execute(req, resp);

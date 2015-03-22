@@ -10,11 +10,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class RequestMappingTest {
-	private RequestMapping rm;
+	private HandlerMapping rm;
 	
 	@Before
 	public void setup() {
-		rm = new RequestMapping();
+		rm = new HandlerMapping();
 	}
 	
 	@Test
