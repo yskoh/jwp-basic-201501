@@ -8,13 +8,26 @@ import next.dao.AnswerDao;
 import next.dao.QuestionDao;
 import next.model.Answer;
 import next.model.Question;
+import core.mvc.annotation.Bean;
+import core.mvc.annotation.Inject;
 
+@Bean
 public class QnaService {
 	private QuestionDao questionDao;
 	private AnswerDao answerDao;
 
 	public QnaService(QuestionDao questionDao, AnswerDao answerDao) {
 		this.questionDao = questionDao;
+		this.answerDao = answerDao;
+	}
+
+	@Inject
+	public void setQuestionDao(QuestionDao questionDao) {
+		this.questionDao = questionDao;
+	}
+	
+	@Inject
+	public void setAnswerDao(AnswerDao answerDao) {
 		this.answerDao = answerDao;
 	}
 

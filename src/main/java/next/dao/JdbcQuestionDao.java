@@ -9,7 +9,9 @@ import next.ResourceNotFoundException;
 import next.model.Question;
 import core.jdbc.JdbcTemplate;
 import core.jdbc.RowMapper;
+import core.mvc.annotation.Bean;
 
+@Bean
 public class JdbcQuestionDao implements QuestionDao {
 	private JdbcTemplate jdbcTemplate;
 	private AnswerDao answerDao;

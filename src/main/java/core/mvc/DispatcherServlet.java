@@ -16,24 +16,25 @@ public class DispatcherServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final Logger logger = LoggerFactory.getLogger(DispatcherServlet.class);
 	
-	private HandlerMapping rm;
+	private AnnotationHandlerMapping rm;
 
 	@Override
 	public void init() throws ServletException {
-		rm = new HandlerMapping();
-		rm.initMapping();
+		rm = new AnnotationHandlerMapping("next");
+		rm.initialize();
 	}
 
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		String requestUri = req.getRequestURI();
-		logger.debug("Method : {}, Request URI : {}", req.getMethod(), requestUri);
+		HandlerExecution handlerExcecution = rm.getHandler(req);
+		if (handlerExcecution == null) {
+			throw new ServletException(String.format("%s uri에 해당하는 Controller를 찾을 수 없다.", req.getRequestURI()));
+		}
 		
-		OldController controller = rm.findController(urlExceptParameter(req.getRequestURI()));
 		ModelAndView mav;
 		try {
-			mav = controller.execute(req, resp);
+			mav = handlerExcecution.execute(req, resp);
 			View view = mav.getView();
 			view.render(mav.getModel(), req, resp);
 		} catch (Throwable e) {

@@ -52,12 +52,10 @@ public class BeanInstaniator {
 			logger.debug("invoke method : {}", method);
 			Parameter[] parameters = method.getParameters();
 			for (Parameter parameter : parameters) {
-				logger.debug("parameter type : {}", parameter.getType());
-				Object injected = beans.get(parameter.getType());
+				Object injected = findInjectedObject(beans, parameter);
 				if (injected == null) {
 					throw new IllegalSignatureException(parameter.getType() + "인스턴스가 존재하지 않습니다.");
 				}
-				
 				try {
 					method.invoke(beans.get(method.getDeclaringClass()), beans.get(parameter.getType()));
 				} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
@@ -65,6 +63,26 @@ public class BeanInstaniator {
 				}
 			}
 		}
+	}
+
+	private Object findInjectedObject(Map<Class<?>, Object> beans, Parameter parameter) {
+		Class<?> parameterClazz = parameter.getType();
+		logger.debug("parameter type : {}", parameterClazz);
+		if (parameterClazz.isInterface()) {
+			return beans.get(findConcreteClass(beans, parameterClazz));
+		}
+		return beans.get(parameterClazz);
+	}
+	
+	Class<?> findConcreteClass(Map<Class<?>, Object> beans, Class<?> interfaceClazz) {
+		Set<Class<?>> keys = beans.keySet();
+		for (Class<?> clazz : keys) {
+			Set<Class<?>> interfaces = Sets.newHashSet(clazz.getInterfaces());
+			if (interfaces.contains(interfaceClazz)) {
+				return clazz;
+			}
+		}
+		return null;
 	}
 	
 	Set<Class<?>> getTypesAnnotatedWith(@SuppressWarnings("unchecked") Class<? extends Annotation>... annotations) {

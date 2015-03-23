@@ -1,9 +1,5 @@
 package core.mvc;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.junit.Assert.assertThat;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.mock.web.MockHttpServletRequest;
@@ -23,7 +19,7 @@ public class AnnotationHandlerMappingTest {
 		MockHttpServletRequest request = new MockHttpServletRequest("GET", "/users/findUserId?userId=javajigi");
 		MockHttpServletResponse response = new MockHttpServletResponse();
 		HandlerExecution execution = handlerMapping.getHandler(request);
-		ModelAndView mav = execution.execute(request, response);
+		execution.execute(request, response);
 	}
 
 }

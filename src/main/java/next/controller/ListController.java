@@ -17,7 +17,6 @@ public class ListController extends AbstractController {
 		this.questionDao = questionDao;
 	}
 
-	@Override
 	public ModelAndView execute(HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		List<Question> questions = questionDao.findAll();

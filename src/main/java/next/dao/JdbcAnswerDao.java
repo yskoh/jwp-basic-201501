@@ -8,7 +8,9 @@ import java.util.List;
 import next.model.Answer;
 import core.jdbc.JdbcTemplate;
 import core.jdbc.RowMapper;
+import core.mvc.annotation.Bean;
 
+@Bean
 public class JdbcAnswerDao implements AnswerDao {
 	private JdbcTemplate jdbcTemplate;
 	
