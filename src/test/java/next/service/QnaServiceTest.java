@@ -28,7 +28,9 @@ public class QnaServiceTest {
 	public void setup() {
 		questionDao = new MockQuestionDao();
 		answerDao = new MockAnswerDao();
-		qnaService = new QnaService(questionDao, answerDao);
+		qnaService = new QnaService();
+		qnaService.setAnswerDao(answerDao);
+		qnaService.setQuestionDao(questionDao);
 	}
 
 	@Test(expected = ResourceNotFoundException.class)

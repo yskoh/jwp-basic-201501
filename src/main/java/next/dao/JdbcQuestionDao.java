@@ -10,14 +10,20 @@ import next.model.Question;
 import core.jdbc.JdbcTemplate;
 import core.jdbc.RowMapper;
 import core.mvc.annotation.Bean;
+import core.mvc.annotation.Inject;
 
 @Bean
 public class JdbcQuestionDao implements QuestionDao {
 	private JdbcTemplate jdbcTemplate;
 	private AnswerDao answerDao;
 	
-	public JdbcQuestionDao(JdbcTemplate jdbcTemplate, AnswerDao answerDao) {
+	@Inject
+	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
+	}
+	
+	@Inject
+	public void setAnswerDao(AnswerDao answerDao) {
 		this.answerDao = answerDao;
 	}
 	

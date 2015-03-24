@@ -20,7 +20,7 @@ public class DispatcherServlet extends HttpServlet {
 
 	@Override
 	public void init() throws ServletException {
-		rm = new AnnotationHandlerMapping("next");
+		rm = new AnnotationHandlerMapping("next", "core");
 		rm.initialize();
 	}
 

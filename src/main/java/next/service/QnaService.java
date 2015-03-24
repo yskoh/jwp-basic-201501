@@ -16,11 +16,6 @@ public class QnaService {
 	private QuestionDao questionDao;
 	private AnswerDao answerDao;
 
-	public QnaService(QuestionDao questionDao, AnswerDao answerDao) {
-		this.questionDao = questionDao;
-		this.answerDao = answerDao;
-	}
-
 	@Inject
 	public void setQuestionDao(QuestionDao questionDao) {
 		this.questionDao = questionDao;
@@ -29,6 +24,10 @@ public class QnaService {
 	@Inject
 	public void setAnswerDao(AnswerDao answerDao) {
 		this.answerDao = answerDao;
+	}
+	
+	public void save(Question question) {
+		this.questionDao.insert(question);
 	}
 
 	public void delete(final long questionId) throws ResourceNotFoundException, ExistedAnotherUserException {
@@ -47,5 +46,17 @@ public class QnaService {
 
 	public List<Answer> findAnswersByQuestionId(long questionId) {
 		return answerDao.findAllByQuestionId(questionId);
+	}
+
+	public List<Question> findAll() {
+		return questionDao.findAll();
+	}
+
+	public void addAnswer(Answer answer) {
+		answerDao.insert(answer);
+	}
+
+	public void updateCommentCount(long questionId) {
+		questionDao.updateCommentCount(questionId);
 	}
 }

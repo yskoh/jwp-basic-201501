@@ -24,11 +24,11 @@ import core.mvc.annotation.RequestMethod;
 public class AnnotationHandlerMapping {
 	private static final Logger logger = LoggerFactory.getLogger(AnnotationHandlerMapping.class);
 	
-	private String basePackage;
+	private String[] basePackage;
 	
 	private Map<HandlerKey, HandlerExecution> handlerExecutions;
 	
-	public AnnotationHandlerMapping(String basePackage) {
+	public AnnotationHandlerMapping(String... basePackage) {
 		this.basePackage = basePackage;
 		this.handlerExecutions= Maps.newHashMap(); 
 	}

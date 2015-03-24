@@ -9,11 +9,14 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import core.mvc.annotation.Bean;
+
+@Bean
 public class JdbcTemplate {
 	private DataSource dataSource;
 
-	public JdbcTemplate(DataSource dataSource) {
-		this.dataSource = dataSource;
+	public JdbcTemplate() {
+		dataSource = ConnectionManager.getDataSource();
 	}
 
 	public void update(String sql, PreparedStatementSetter pss) throws DataAccessException {

@@ -9,12 +9,14 @@ import next.model.Answer;
 import core.jdbc.JdbcTemplate;
 import core.jdbc.RowMapper;
 import core.mvc.annotation.Bean;
+import core.mvc.annotation.Inject;
 
 @Bean
 public class JdbcAnswerDao implements AnswerDao {
 	private JdbcTemplate jdbcTemplate;
 	
-	public JdbcAnswerDao(JdbcTemplate jdbcTemplate) {
+	@Inject
+	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
 	}
 	

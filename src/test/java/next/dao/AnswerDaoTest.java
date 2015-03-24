@@ -4,8 +4,6 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
-import javax.sql.DataSource;
-
 import next.model.Answer;
 
 import org.junit.Before;
@@ -18,7 +16,7 @@ import core.jdbc.ConnectionManager;
 import core.jdbc.JdbcTemplate;
 
 public class AnswerDaoTest {
-	private AnswerDao dut;
+	private JdbcAnswerDao dut;
 	
 	@Before
 	public void setup() {
@@ -26,9 +24,9 @@ public class AnswerDaoTest {
 		populator.addScript(new ClassPathResource("jwp.sql"));
 		DatabasePopulatorUtils.execute(populator, ConnectionManager.getDataSource());
 		
-		DataSource dataSource = ConnectionManager.getDataSource();
-		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-		dut = new JdbcAnswerDao(jdbcTemplate);
+		JdbcTemplate jdbcTemplate = new JdbcTemplate();
+		dut = new JdbcAnswerDao();
+		dut.setJdbcTemplate(jdbcTemplate);
 	}
 
 	@Test
