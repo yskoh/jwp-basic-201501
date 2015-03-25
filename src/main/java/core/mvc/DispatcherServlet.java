@@ -11,11 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@WebServlet(name="dispatcher", urlPatterns="*.next")
+@WebServlet(name = "dispatcher", urlPatterns = "*.next", loadOnStartup = 1)
 public class DispatcherServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final Logger logger = LoggerFactory.getLogger(DispatcherServlet.class);
-	
+
 	private RequestMapping rm;
 
 	@Override
@@ -25,11 +25,10 @@ public class DispatcherServlet extends HttpServlet {
 	}
 
 	@Override
-	protected void service(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
+	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String requestUri = req.getRequestURI();
 		logger.debug("Method : {}, Request URI : {}", req.getMethod(), requestUri);
-		
+
 		Controller controller = rm.findController(urlExceptParameter(req.getRequestURI()));
 		ModelAndView mav;
 		try {
@@ -47,7 +46,7 @@ public class DispatcherServlet extends HttpServlet {
 		if (index > 0) {
 			return forwardUrl.substring(0, index);
 		}
-		
+
 		return forwardUrl;
 	}
 }
