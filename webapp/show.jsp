@@ -27,7 +27,10 @@
 	    </div>
 	</div>    
 
-  	<br /> <a href="/list.next">목록으로</a>
+  	<br /> 
+  	<a href="/updateForm.next?questionId=${question.questionId}">수정</a>&nbsp;&nbsp;
+  	<a href="/delete.next?questionId=${question.questionId}">삭제</a>&nbsp;&nbsp;
+  	<a href="/list.next">목록으로</a>
   	
 	<h3>답변</h3>
 	<div class="answerWrite">
