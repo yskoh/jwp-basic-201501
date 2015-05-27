@@ -5,6 +5,7 @@ import java.util.Map;
 
 import next.controller.ListController;
 import next.controller.ShowController;
+import next.controller.addAnswer;
 import next.controller.addQuestion;
 
 import org.slf4j.Logger;
@@ -19,6 +20,7 @@ public class RequestMapping {
 		mappings.put("/show.next", new ShowController());
 		mappings.put("/form.next", new ForwardController("form.jsp"));
 		mappings.put("/save.next", new addQuestion());
+		mappings.put("/api/addanswer.next", new addAnswer());
 		
 		logger.info("Initialized Request Mapping!");
 	}
