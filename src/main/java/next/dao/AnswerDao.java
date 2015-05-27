@@ -11,6 +11,11 @@ import core.jdbc.RowMapper;
 
 public class AnswerDao {
 
+	public void delete(long answerId){
+		JdbcTemplate jdbcTemplate = new JdbcTemplate();
+		String sql = "DELETE FROM answers WHERE answerId = ?";
+		jdbcTemplate.update(sql, answerId);
+	}
 	public void insert(Answer answer) {
 		JdbcTemplate jdbcTemplate = new JdbcTemplate();
 		String sql = "INSERT INTO ANSWERS (writer, contents, createdDate, questionId) VALUES (?, ?, ?, ?)";

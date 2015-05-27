@@ -21,7 +21,7 @@ public class addAnswer extends AbstractController{
 		AnswerDao answerDao = new AnswerDao();
 		answerDao.insert(answer);
 		
-		ModelAndView mav = jstlView("redirect:/list.next");
+		ModelAndView mav = jstlView("redirect:/");
 		return mav;
 	}
 }
