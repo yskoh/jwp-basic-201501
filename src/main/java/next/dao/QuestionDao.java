@@ -10,7 +10,7 @@ import core.jdbc.JdbcTemplate;
 import core.jdbc.RowMapper;
 
 public class QuestionDao {
-
+	
 	public void insert(Question question) {
 		JdbcTemplate jdbcTemplate = new JdbcTemplate();
 		String sql = "INSERT INTO QUESTIONS (writer, title, contents, createdDate, countOfComment) VALUES (?, ?, ?, ?, ?)";
