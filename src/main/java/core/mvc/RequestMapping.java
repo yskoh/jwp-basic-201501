@@ -23,6 +23,8 @@ public class RequestMapping {
 		mappings.put("/api/addanswer.next", new addAnswer());
 		mappings.put("/deleteanswer.next", new DeleteAnswer());
 		mappings.put("/api/list.next", new Moblie());
+		mappings.put("/updateForm.next", new UpdateForm());
+		mappings.put("/delete.next", new DeleteQuestion());
 		
 		logger.info("Initialized Request Mapping!");
 	}

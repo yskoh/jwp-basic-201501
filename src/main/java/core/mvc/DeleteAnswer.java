@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import core.utils.ServletRequestUtils;
 import next.dao.AnswerDao;
+import next.dao.QuestionDao;
 
 public class DeleteAnswer extends AbstractController {
 
@@ -13,11 +14,14 @@ public class DeleteAnswer extends AbstractController {
 			HttpServletResponse response) throws Exception {
 		
 		long answerId = ServletRequestUtils.getRequiredLongParameter(request, "answerId");
+		long questionId = ServletRequestUtils.getRequiredLongParameter(request, "questionId");
 		
 		AnswerDao answerdao = new AnswerDao();
 		answerdao.delete(answerId);
+		QuestionDao questiondao = new QuestionDao();
+		questiondao.subtractCount(questionId);
 		
-		ModelAndView mav = jstlView("redirect:/show.next");
+		ModelAndView mav = jstlView("redirect:/");
 		return mav;
 	}
 

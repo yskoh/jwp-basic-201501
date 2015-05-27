@@ -64,12 +64,13 @@
 	                </span>
 	            </div>
 	            <div class="comment-content">
+	            <span id="questionId">${question.questionId }</span>
 	           	<span id="answerId">${answer.answerId}</span>
 	                <div class="about">내용: </div>
 	                ${answer.contents}
 	            </div>
 	            <div>
-	            	<a href="/api/deleteanswer.next" class="delete">삭제</a>
+	            	<a href="/deleteanswer.next" class="delete">삭제</a>
 	            </div>
 	        </div>
 		</c:forEach> 

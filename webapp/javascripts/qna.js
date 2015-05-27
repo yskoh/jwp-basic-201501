@@ -12,7 +12,7 @@ for( var i =0; i < answerList.length; i++){
 function deleteAnswer(e){
 	e.preventDefault();
 	var url="/deleteanswer.next";
-	var param = "answerId="+ document.getElementById("answerId").innerText;
+	var params = "answerId=" + document.getElementById("answerId").innerText +"&questionId=" + document.getElementById("questionId").innerText;
 	
 	 var request = new XMLHttpRequest();
 	 request.open("POST", url, true);
@@ -24,7 +24,7 @@ function deleteAnswer(e){
 		 }
 	 }
 	 
-	 request.send(param);
+	 request.send(params);
 
 }
 
