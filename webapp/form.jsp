@@ -6,8 +6,8 @@
 </head>
 <body>
 	<div id="main">
-<%-- 	<c:choose>
-		<c:when test="${not empty question}"> --%>
+ 	<c:choose>
+		<c:when test="${not empty question}">
 		<c:set var="method" value="post" />
 		<form name="questionForm"
 			action="/updateForm.next?questionId=${question.questionId }"
@@ -32,7 +32,7 @@
 			</table>
 			<input type="submit" value="Register" />
 		</form>
-<%-- 		</c:when>
+ 		</c:when>
 		<c:otherwise>
 			<c:set var="method" value="post" />
 			<form name="questionForm" action="/save.next" method="${method}">
@@ -53,7 +53,7 @@
 				<input type="submit" value="질문하기" />
 			</form>
 		</c:otherwise>
-		</c:choose> --%>
+		</c:choose>
 	</div>
 </body>
 </html>
