@@ -13,6 +13,12 @@ import core.jdbc.RowMapper;
 
 public class QuestionDao {
 	
+	public void update(Question question, int questionId){
+		JdbcTemplate jdbcTemplate = new JdbcTemplate();
+		String sql = "UPDATE questions SET writer =?, title =?, contents=? WHERE questionId= ?";
+		jdbcTemplate.update(sql, question.getWriter(), question.getTitle(), question.getContents(), questionId);
+	}
+	
 	public void delete(long questionId){
 		JdbcTemplate jdbcTemplate = new JdbcTemplate();
 		String sql = " DELETE FROM questions where questionId = ?";

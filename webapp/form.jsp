@@ -6,25 +6,54 @@
 </head>
 <body>
 	<div id="main">
+<%-- 	<c:choose>
+		<c:when test="${not empty question}"> --%>
 		<c:set var="method" value="post" />
-				
-		<form name="questionForm" action="/save.next" method="${method}">
+		<form name="questionForm"
+			action="/updateForm.next?questionId=${question.questionId }"
+			method="${method}">
 			<table>
 				<tr>
 					<td width="80">글쓴이</td>
-					<td><input type="text" name="writer" size="40"/></td>
-				</tr>			
+					<td><input type="text" name="writer" size="40"
+						value="${question.writer}" /></td>
+				</tr>
 				<tr>
 					<td width="80">제목</td>
-					<td><input type="text" name="title" size="70"/></td>
+					<td><input type="text" name="title" size="70"
+						value="${question.title}" /></td>
 				</tr>
 				<tr>
 					<td width="80">내용</td>
-					<td><textarea name="contents" rows="5" cols="130"></textarea></td>
+					<td><textarea name="contents" rows="5" cols="130"
+							value="${question.contents}">${question.contents}</textarea></td>
+							
 				</tr>
 			</table>
-			<input type="submit" value="질문하기" />			
+			<input type="submit" value="Register" />
 		</form>
+<%-- 		</c:when>
+		<c:otherwise>
+			<c:set var="method" value="post" />
+			<form name="questionForm" action="/save.next" method="${method}">
+				<table>
+					<tr>
+						<td width="80">글쓴이</td>
+						<td><input type="text" name="writer" size="40" /></td>
+					</tr>
+					<tr>
+						<td width="80">제목</td>
+						<td><input type="text" name="title" size="70" /></td>
+					</tr>
+					<tr>
+						<td width="80">내용</td>
+						<td><textarea name="contents" rows="5" cols="130"></textarea></td>
+					</tr>
+				</table>
+				<input type="submit" value="질문하기" />
+			</form>
+		</c:otherwise>
+		</c:choose> --%>
 	</div>
 </body>
 </html>

@@ -3,7 +3,7 @@ DROP TABLE IF EXISTS QUESTIONS;
 CREATE TABLE QUESTIONS (
 	questionId 			bigint				auto_increment,
 	writer				varchar(30)			NOT NULL,
-	title				varchar(50)			NOT NULL,
+	title				varchar(100)			NOT NULL,
 	contents			varchar(5000)		NOT NULL,
 	createdDate			timestamp			NOT NULL,
 	countOfComment		int,
