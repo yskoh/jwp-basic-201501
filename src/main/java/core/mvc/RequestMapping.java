@@ -24,7 +24,7 @@ public class RequestMapping {
 		mappings.put("/deleteanswer.next", new DeleteAnswer());
 		mappings.put("/api/list.next", new Moblie());
 //		mappings.put("/editForm.next", new ForwardController("form.jsp"));
-		mappings.put("/editForm.next", new EditController("form.jsp"));
+		mappings.put("/editForm.next", new ForwardController("form.jsp"));
 		mappings.put("/updateForm.next", new UpdateForm());
 		mappings.put("/delete.next", new DeleteQuestion());
 		mappings.put("/api/delete.next", new apiDelete());
