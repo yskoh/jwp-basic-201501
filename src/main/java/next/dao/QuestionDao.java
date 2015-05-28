@@ -5,11 +5,19 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
 
+import javax.servlet.ServletResponse;
+
 import next.model.Question;
 import core.jdbc.JdbcTemplate;
 import core.jdbc.RowMapper;
 
 public class QuestionDao {
+	
+	public void delete(long questionId){
+		JdbcTemplate jdbcTemplate = new JdbcTemplate();
+		String sql = " DELETE FROM questions where questionId = ?";
+		jdbcTemplate.update(sql, questionId);
+	}
 	
 	public void subtractCount(long questionId) {
 		JdbcTemplate jdbcTemplate = new JdbcTemplate();

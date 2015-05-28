@@ -5,6 +5,8 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
 
+import javax.servlet.ServletResponse;
+
 import next.model.Answer;
 import core.jdbc.JdbcTemplate;
 import core.jdbc.RowMapper;
@@ -46,4 +48,17 @@ public class AnswerDao {
 		
 		return jdbcTemplate.query(sql, rm, questionId);
 	}
+	
+	public Answer findWriter(long questionId) {
+		RowMapper<Answer> rm = new RowMapper<Answer>() {
+						@Override
+					public Answer mapRow(ResultSet rs) throws SQLException {
+							return new Answer(rs.getString("writer"));
+						}
+					};
+					
+					JdbcTemplate jdbcTemplate = new JdbcTemplate();
+					String sql = "SELECT writer FROM ANSWERS WHERE questionId = ?";
+					return jdbcTemplate.queryForObject(sql, rm, questionId);
+	}	
 }

@@ -25,6 +25,7 @@ public class RequestMapping {
 		mappings.put("/api/list.next", new Moblie());
 		mappings.put("/updateForm.next", new UpdateForm());
 		mappings.put("/delete.next", new DeleteQuestion());
+		mappings.put("/api/delete.next", new apiDelete());
 		
 		logger.info("Initialized Request Mapping!");
 	}
